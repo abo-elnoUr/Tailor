@@ -1,0 +1,182 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 main">
+      <h3 class="my-2 text-center">اضافه زبون</h3>
+
+      <form [formGroup]="listForm" style="text-align: right">
+        <div style="margin-bottom: 15px">
+          <label for="name" class="form-label">اسم الزبون</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="الاسم"
+            formControlName="name"
+            autocomplete="off"
+          />
+          <div
+            *ngIf="
+              listFormValidate.name.invalid &&
+              (listFormValidate.name.dirty || listFormValidate.name.touched)
+            "
+          >
+            <small *ngIf="listFormValidate.name.errors?.required"
+              >الاسم مطلوب</small
+            >
+            <small *ngIf="listFormValidate.name.errors?.minlength"
+              >يجب ان لا يقل الاسم عن 3 حروف</small
+            >
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="margin-bottom: 15px" class="col-lg-6">
+            <label for="kom" class="form-label">الكم</label>
+            <input
+              type="number"
+              class="form-control"
+              id="kom"
+              placeholder="الكم"
+              formControlName="kom"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.kom.invalid &&
+                (listFormValidate.kom.dirty || listFormValidate.kom.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.kom.errors?.required"
+                >الكم مطلوب</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px" class="col-lg-6">
+            <label for="tall" class="form-label">الطول</label>
+            <input
+              type="number"
+              class="form-control"
+              id="tall"
+              placeholder="الطول"
+              formControlName="tall"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.tall.invalid &&
+                (listFormValidate.tall.dirty || listFormValidate.tall.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.tall.errors?.required"
+                >الطول مطلوب</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="margin-bottom: 15px" class="col-lg-6">
+            <label for="west" class="form-label">الوسط</label>
+            <input
+              type="number"
+              class="form-control"
+              id="west"
+              placeholder="الوسط"
+              formControlName="west"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.west.invalid &&
+                (listFormValidate.west.dirty || listFormValidate.west.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.west.errors?.required"
+                >الوسط مطلوب</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px" class="col-lg-6">
+            <label for="sdr" class="form-label">الصدر</label>
+            <input
+              type="number"
+              class="form-control"
+              id="sdr"
+              placeholder="الصدر"
+              formControlName="sdr"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.sdr.invalid &&
+                (listFormValidate.sdr.dirty || listFormValidate.sdr.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.sdr.errors?.required"
+                >الصدر مطلوب</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="margin-bottom: 15px" class="col-lg-6">
+            <label for="mobile" class="form-label">الموبايل</label>
+            <input
+              type="text"
+              class="form-control"
+              id="mobile"
+              placeholder="رقم الوبايل"
+              formControlName="mobile"
+              autocomplete="off"
+            />
+          </div>
+          <div style="margin-bottom: 15px" class="col-lg-6">
+            <label for="wasa" class="form-label">وسع</label>
+            <input
+              type="number"
+              class="form-control"
+              id="wasa"
+              placeholder="وسع"
+              formControlName="wasa"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.wasa.invalid &&
+                (listFormValidate.wasa.dirty || listFormValidate.wasa.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.wasa.errors?.required"
+                >وسع مطلوب</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 15px">
+          <label for="note" class="form-label">ملاحظات</label>
+          <textarea
+            class="form-control"
+            placeholder="ملاحظات"
+            id="note"
+            rows="3"
+            formControlName="note"
+            autocomplete="off"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-outline-primary mb-4"
+          [disabled]="listForm.invalid"
+          (click)="onAddCustomer()"
+        >
+          اضافه
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

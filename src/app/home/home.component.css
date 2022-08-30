@@ -1,0 +1,71 @@
+
+input
+{
+  text-align: right;
+  right: 0;
+}
+
+.title .span_1
+{
+  font-size : 22px;
+  display:inline-block;
+  transform-origin: top left;
+  transform:rotate(-45deg);
+}
+
+.title .span_2
+{
+  font-size : 70px;
+  color: gold;
+}
+
+.row_mine
+{
+  cursor: pointer;
+}
+
+/* pagination */
+
+/* .pagination {
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  padding: 10px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: fit-content;
+  border-radius: 4px;
+}
+.pagination li {
+  list-style: none;
+  line-height: 20px;
+  margin: 0 5px;
+  border-radius: 4px;
+}
+.pagination li .pageNum {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+.pagination li .pageNum:hover {
+  background-color: #111;
+  color: #fff;
+}
+.pagination li a {
+  display: block;
+  text-decoration: none;
+  color: #777;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pagination li:first-child {
+  font-weight: 700;
+  font-size: 20px;
+  font-weight: 700;
+  font-size: 20px;
+}
+.pagination li .pageNum.active a {
+  background-color: #111;
+  color: #fff;
+} */

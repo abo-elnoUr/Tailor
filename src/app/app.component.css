@@ -1,0 +1,17 @@
+
+
+nav ul li a
+{
+  font-size : 28px;
+  font-weight: bolder
+}
+
+nav ul li a.active
+{
+  color: gold
+}
+
+nav ul li a:hover
+{
+  color: #000
+}

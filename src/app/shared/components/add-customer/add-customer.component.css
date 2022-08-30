@@ -1,0 +1,9 @@
+input, textarea
+{
+  text-align : right
+}
+
+label,input
+{
+  font-size:18px
+}

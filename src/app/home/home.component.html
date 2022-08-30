@@ -1,0 +1,318 @@
+<!-- app name  -->
+<div class="mx-auto my-3 title">
+  <h4 class="text-center">
+    <span class="span_1">
+      <img style="width: 50px" src="../../assets/images/heart.png" /></span
+    >ترزي<span class="span_2"> السعاده </span>
+  </h4>
+</div>
+<!-- searching -->
+<div class="input-group mx-auto my-4 w-75">
+  <input
+    type="search"
+    class="form-control"
+    placeholder=" ...ابحث بالاسم,او الموبايل,او بالتاريخ"
+    [(ngModel)]="search"
+  />
+</div>
+
+<!-- customer data -->
+<div class="table-responsive mx-2">
+  <table class="table text-center table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">حذف</th>
+        <th scope="col">ملاحظات</th>
+        <th scope="col">موبايل</th>
+        <th scope="col">التاريخ</th>
+        <th scope="col">وسع</th>
+        <th scope="col">الوسط</th>
+        <th scope="col">الصدر</th>
+        <th scope="col">الكم</th>
+        <th scope="col">الطول</th>
+        <th scope="col">الاسم</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="row_mine"
+        *ngFor="let c of customers | LockFilter: search; let i = index"
+        (click)="getCustomerId(c.id)"
+      >
+        <td>
+          <button
+            style="z-index: 9999"
+            class="btn btn-outline-danger"
+            (click)="deleteCustomer(c.id)"
+          >
+            حذف
+          </button>
+        </td>
+        <td hidden>{{ c.id }}</td>
+        <td
+          *ngIf="c.note"
+          data-bs-toggle="modal"
+          data-bs-target="#customerModal"
+        >
+          {{ c.note }}
+        </td>
+        <td
+          *ngIf="!c.note"
+          data-bs-toggle="modal"
+          data-bs-target="#customerModal"
+        >
+          {{ "لا يوجد ملاحظات" }}
+        </td>
+        <td
+          *ngIf="c.mobile"
+          data-bs-toggle="modal"
+          data-bs-target="#customerModal"
+        >
+          {{ c.mobile }}
+        </td>
+        <td
+          *ngIf="!c.mobile"
+          data-bs-toggle="modal"
+          data-bs-target="#customerModal"
+        >
+          {{ "لا يوجد موبايل" }}
+        </td>
+        <td data-bs-toggle="modal" data-bs-target="#customerModal">
+          {{ c.createdAt | date: "yyyy/MM/dd  hh:mm:ss" }}
+        </td>
+        <td data-bs-toggle="modal" data-bs-target="#customerModal">
+          {{ c.wasa }}
+        </td>
+        <td data-bs-toggle="modal" data-bs-target="#customerModal">
+          {{ c.west }}
+        </td>
+        <td data-bs-toggle="modal" data-bs-target="#customerModal">
+          {{ c.sdr }}
+        </td>
+        <td data-bs-toggle="modal" data-bs-target="#customerModal">
+          {{ c.kom }}
+        </td>
+        <td data-bs-toggle="modal" data-bs-target="#customerModal">
+          {{ c.tall }}
+        </td>
+        <td data-bs-toggle="modal" data-bs-target="#customerModal">
+          {{ c.name }}
+        </td>
+        <th scope="row">{{ i + 1 }}</th>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- pagination -->
+
+  <!-- <div class="col-md-12">
+    <ul style="margin: 10px auto" class="pagination">
+      <li class="prev"><a>&laquo;</a></li>
+      <li
+        *ngFor="let todo of numberArray(customers.length); let i = index"
+        class="pageNum"
+        (click)="changeNumber(i)"
+      >
+        <a>{{ i + 1 }}</a>
+      </li>
+      <li class="next"><a>&raquo;</a></li>
+    </ul>
+  </div> -->
+</div>
+
+<!-- modal of customer -->
+
+<div
+  class="modal fade"
+  id="customerModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title ms-auto" id="exampleModalLabel">مقاس الزبون</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="listForm" style="text-align: right">
+          <div style="margin-bottom: 15px">
+            <label for="name" class="form-label">اسم الزبون</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="الاسم"
+              formControlName="name"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.name.invalid &&
+                (listFormValidate.name.dirty || listFormValidate.name.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.name.errors?.required"
+                >الاسم مطلوب</small
+              >
+              <small *ngIf="listFormValidate.name.errors?.minlength"
+                >يجب ان لا يقل الاسم عن 3 حروف</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px">
+            <label for="tall" class="form-label">الطول</label>
+            <input
+              type="number"
+              class="form-control"
+              id="tall"
+              placeholder="الطول"
+              formControlName="tall"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.tall.invalid &&
+                (listFormValidate.tall.dirty || listFormValidate.tall.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.tall.errors?.required"
+                >الطول مطلوب</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px">
+            <label for="kom" class="form-label">الكم</label>
+            <input
+              type="number"
+              class="form-control"
+              id="kom"
+              placeholder="الكم"
+              formControlName="kom"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.kom.invalid &&
+                (listFormValidate.kom.dirty || listFormValidate.kom.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.kom.errors?.required"
+                >الكم مطلوب</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px">
+            <label for="sdr" class="form-label">الصدر</label>
+            <input
+              type="number"
+              class="form-control"
+              id="sdr"
+              placeholder="الصدر"
+              formControlName="sdr"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.sdr.invalid &&
+                (listFormValidate.sdr.dirty || listFormValidate.sdr.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.sdr.errors?.required"
+                >الصدر مطلوب</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px">
+            <label for="west" class="form-label">الوسط</label>
+            <input
+              type="number"
+              class="form-control"
+              id="west"
+              placeholder="الوسط"
+              formControlName="west"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.west.invalid &&
+                (listFormValidate.west.dirty || listFormValidate.west.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.west.errors?.required"
+                >الوسط مطلوب</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px">
+            <label for="wasa" class="form-label">وسع</label>
+            <input
+              type="number"
+              class="form-control"
+              id="wasa"
+              placeholder="وسع"
+              formControlName="wasa"
+              autocomplete="off"
+            />
+            <div
+              *ngIf="
+                listFormValidate.wasa.invalid &&
+                (listFormValidate.wasa.dirty || listFormValidate.wasa.touched)
+              "
+            >
+              <small *ngIf="listFormValidate.wasa.errors?.required"
+                >وسع مطلوب</small
+              >
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px">
+            <label for="mobile" class="form-label">موبايل</label>
+            <input
+              type="text"
+              class="form-control"
+              id="mobile"
+              placeholder="رقم الموبايل"
+              formControlName="mobile"
+              autocomplete="off"
+            />
+          </div>
+
+          <div style="margin-bottom: 15px">
+            <label for="note" class="form-label">ملاحظات</label>
+            <textarea
+              class="form-control"
+              placeholder="ملاحظات"
+              id="note"
+              rows="3"
+              formControlName="note"
+              autocomplete="off"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-outline-info"
+            [disabled]="listForm.invalid"
+            (click)="onUpdateCustomer()"
+            data-bs-dismiss="modal"
+          >
+            تعديل
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
